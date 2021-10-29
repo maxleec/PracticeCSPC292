@@ -1,0 +1,55 @@
+---
+title: "Project 1 Max Lee CSPC292-02"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(lattice)
+library(ggplot2)
+library(tidyr)
+```
+
+
+```{r data, include = TRUE}
+weatherdata <- read.csv("data/KCQT.csv")
+weatherdata
+```
+
+```{r graph, include = TRUE}
+class(weatherdata$date)
+weatherdata$date
+
+ggplot(data = weatherdata, aes(x = 1:365))  +
+  geom_line(data = weatherdata, aes(y  = actual_mean_temp, color = "darkseagreen")) +  labs(x = "July 2014                                   December 2014                                    July 2015", y = "Temperature in degrees F", title = "Temperatures Over 1 Year in LA") +
+  theme(plot.title = element_text(size = rel(2))) +
+geom_line(data = weatherdata, aes(y  = actual_min_temp, color = "blue2")) +
+geom_line(data = weatherdata, aes(y  = actual_max_temp, color = "brown4")) +
+geom_line(data = weatherdata, aes(y  = record_max_temp, color = "grey69")) +
+scale_colour_manual(name = "Legend", values= c("blue2", "brown4", "darkseagreen", "grey69"), labels = c("Minimum Tempearture", "Maximum Temperature", "Mean Temperature", "Record Temperature")) +
+  theme(plot.background = element_rect(fill = "azure1")) +
+  theme(legend.background = element_rect(fill = "azure2"))
+```
+```{r graph2, include = TRUE}
+
+ggplot(data = weatherdata, aes(x = 1:365))  +
+  geom_line(data = weatherdata, aes(y  = actual_max_temp, color = "brown4")) +  labs(x = "July 2014                                   December 2014                                    July 2015", y = "Temperature in degrees F", title = "Temperatures Over 1 Year in LA") +
+  theme(plot.title = element_text(size = rel(2))) +
+geom_line(data = weatherdata, aes(y  = record_max_temp, color = "coral2")) +
+scale_colour_manual(name = "Legend", values= c("brown4", "coral2"), labels = c("Maximum Temperature", "Record Temperature")) +
+  geom_vline(xintercept = 77, linetype="solid", 
+                color = "cadetblue3", size=0.5) +
+  geom_vline(xintercept = 257, linetype="solid", 
+                color = "cadetblue3", size=0.3) +
+  geom_vline(xintercept = 258, linetype="solid", 
+                color = "cadetblue3", size=0.3) +
+  geom_vline(xintercept = 259, linetype="solid", 
+                color = "cadetblue3", size=0.3) +
+geom_vline(xintercept = 275, linetype="solid", 
+                color = "cadetblue3", size=0.5) +
+geom_text(x= 77, y = 60, label = "New Record", color = "black") +
+geom_text(x= 270, y = 60, label = "New Records", color = "black") +
+  theme(plot.background = element_rect(fill = "azure1")) +
+    theme(legend.background = element_rect(fill = "azure2"))
+
+
+```
